@@ -1,0 +1,15 @@
+{
+  "name": "svg-playground",
+  "version": "0.0.0",
+  "description": "Create and play with SVG images using JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "svg",
+    "playground"
+  ],
+  "author": "Eric McCarthy <eric@limulus.net> (http://www.limulus.net/)",
+  "license": "MIT"
+}
