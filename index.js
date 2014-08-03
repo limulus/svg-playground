@@ -1,21 +1,18 @@
+var vm = require("vm")
+  , JavaScriptEditor = require("./src/JavaScriptEditor.js")
 
 window.addEventListener("DOMContentLoaded", function () {
-	var ace = require('brace')
-	require('brace/mode/javascript')
-	require('brace/theme/monokai')
+    var editorElem = document.getElementById("javascript-editor")
+      , editor = new JavaScriptEditor(editorElem)
 
-	var editor = ace.edit('javascript-editor')
-	editor.getSession().setMode('ace/mode/javascript')
-	editor.setTheme('ace/theme/monokai')
+    editor.on("changeValidJS", function (e) {
+        var result = vm.runInNewContext(e.editor().documentText(), {
+            "require": require,
+            "module": { "exports": {} }
+        })
 
-
-	editor.setValue([
-	    '// JavaScript'
-	  , 'var a = 3;'
-	  , ''
-	  , '// below line has an error which is annotated'
-	  , 'var b ='
-	  ].join('\n')
-	);
-	editor.clearSelection();
+        result("bar")
+    })
 }, false)
+
+
