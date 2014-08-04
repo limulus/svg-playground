@@ -3,11 +3,13 @@
 var ace = require("brace")
   , inherits = require("util").inherits
   , EventEmitter = require("events").EventEmitter
+  , JavaScriptEditorEvent = require("./JavaScriptEditorEvent.js")
 
 // Load in JavaScript highlighter/validator and a nice theme.
 require('brace/mode/javascript')
 require('brace/theme/monokai')
 
+// We need a setImmediate implementation for browsers that don't support it.
 require("setimmediate")
 
 var JavaScriptEditor = module.exports = function (element, documentText) {
@@ -44,17 +46,3 @@ JavaScriptEditor.prototype.documentText = function () {
     return this._aceEditor.getValue()
 }
 
-
-var JavaScriptEditorEvent = function (type, jsEditor) {
-    this.type = type
-    this._jsEditor = jsEditor
-    this._documentTextCopy = this._jsEditor.documentText()
-}
-
-JavaScriptEditorEvent.prototype.editor = function () {
-    return this._jsEditor
-}
-
-JavaScriptEditorEvent.prototype.documentText = function () {
-    return this._documentTextCopy
-}
