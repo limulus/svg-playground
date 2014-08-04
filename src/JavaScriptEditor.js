@@ -30,9 +30,7 @@ inherits(JavaScriptEditor, EventEmitter)
 JavaScriptEditor.prototype._handleChangeAnnotationEvent = function () {
     if (this.documentContainsNoErrors()) {
         var jseEvent = new JavaScriptEditorEvent("changeValidJS", this)
-        setImmediate(function () {
-            this.emit("changeValidJS", jseEvent)
-        }.bind(this))
+        setImmediate(this.emit.bind(this, "changeValidJS", jseEvent))
     }
 }
 

@@ -21,7 +21,8 @@ window.addEventListener("DOMContentLoaded", function () {
 }, false)
 
 
-var initialDocumentText = ['module.exports = function (svgElem) {',
+var initialDocumentText = [
+    'module.exports = function (svgElem) {',
     '    ',
     '};',
     ''
