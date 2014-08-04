@@ -8,28 +8,29 @@ var ace = require("brace")
 require('brace/mode/javascript')
 require('brace/theme/monokai')
 
-var JavaScriptEditor = module.exports = function (element) {
+require("setimmediate")
+
+var JavaScriptEditor = module.exports = function (element, documentText) {
     this._aceEditor = ace.edit(element)
     this._aceEditor.getSession().setMode('ace/mode/javascript')
     this._aceEditor.setTheme('ace/theme/monokai')
 
-	this._aceEditor.setValue([
-	    'module.exports = function (svgElem) {',
-	    '    ',
-	    '};',
-        ''
-	  ].join('\n')
-	);
+	this._aceEditor.setValue(documentText);
 	this._aceEditor.clearSelection();
 
-	this._aceEditor.getSession().on("changeAnnotation", function (event) {
-        if (this.documentContainsNoErrors()) {
-            var jseEvent = new JavaScriptEditorEvent("changeValidJS", this)
-            this.emit("changeValidJS", jseEvent)
-        }
-    }.bind(this))
+	var session = this._aceEditor.getSession()
+    session.on("changeAnnotation", this._handleChangeAnnotationEvent.bind(this))
 }
 inherits(JavaScriptEditor, EventEmitter)
+
+JavaScriptEditor.prototype._handleChangeAnnotationEvent = function () {
+    if (this.documentContainsNoErrors()) {
+        var jseEvent = new JavaScriptEditorEvent("changeValidJS", this)
+        setImmediate(function () {
+            this.emit("changeValidJS", jseEvent)
+        }.bind(this))
+    }
+}
 
 JavaScriptEditor.prototype.documentContainsNoErrors = function () {
     var editorAnnotations = this._aceEditor.getSession().getAnnotations()
@@ -44,11 +45,16 @@ JavaScriptEditor.prototype.documentText = function () {
 }
 
 
-var JavaScriptEditorEvent = function (type, jsEditorObject) {
+var JavaScriptEditorEvent = function (type, jsEditor) {
     this.type = type
-    this._jsEditorContext = jsEditorObject
+    this._jsEditor = jsEditor
+    this._documentTextCopy = this._jsEditor.documentText()
 }
 
 JavaScriptEditorEvent.prototype.editor = function () {
-    return this._jsEditorContext
+    return this._jsEditor
+}
+
+JavaScriptEditorEvent.prototype.documentText = function () {
+    return this._documentTextCopy
 }

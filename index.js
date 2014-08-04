@@ -3,16 +3,26 @@ var vm = require("vm")
 
 window.addEventListener("DOMContentLoaded", function () {
     var editorElem = document.getElementById("javascript-editor")
-      , editor = new JavaScriptEditor(editorElem)
+      , editor = new JavaScriptEditor(editorElem, initialDocumentText)
 
     editor.on("changeValidJS", function (e) {
-        var result = vm.runInNewContext(e.editor().documentText(), {
+        var result = vm.runInNewContext(e.documentText(), {
             "require": require,
             "module": { "exports": {} }
         })
 
-        result("bar")
+        try {
+            result("bar")
+        }
+        catch (e) {
+            console.log(e.stack)
+        }
     })
 }, false)
 
 
+var initialDocumentText = ['module.exports = function (svgElem) {',
+    '    ',
+    '};',
+    ''
+].join("\n")
