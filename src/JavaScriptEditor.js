@@ -13,6 +13,8 @@ require('brace/theme/monokai')
 require("setimmediate")
 
 var JavaScriptEditor = module.exports = function (element, documentText) {
+    EventEmitter.call(this)
+
     this._aceEditor = ace.edit(element)
     this._aceEditor.getSession().setMode('ace/mode/javascript')
     this._aceEditor.setTheme('ace/theme/monokai')
