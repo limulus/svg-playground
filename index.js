@@ -1,10 +1,16 @@
 var JavaScriptPlayground = require("./src/JavaScriptPlayground.js")
 
-window.addEventListener("DOMContentLoaded", function () {
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializePlayground, false)
+}
+else {
+    initializePlayground()
+}
+
+function initializePlayground () {
     var playgroundElem = document.getElementById("javascript-playground")
     new JavaScriptPlayground(playgroundElem, jsStubText())
-}, false)
-
+}
 
 function jsStubText () {
     return [
