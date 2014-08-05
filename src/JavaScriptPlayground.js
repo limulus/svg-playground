@@ -21,12 +21,15 @@ JavaScriptPlayground.prototype._handleJSChange = function (event) {
         "module": { "exports": {} }
     }
 
-        vm.runInNewContext(event.documentText(), context)
+    // Should probably have a try block around this and 
+    // do something fancy with the error so the user 
+    // doesn't need to keep the JS console open.
+    vm.runInNewContext(event.documentText(), context)
+    if (context.module && typeof context.module.exports === "function") {
         context.module.exports.call(undefined, "bar")
-    try {
     }
-    catch (e) {
-        console.log(e)
+    else {
+        console.error("module.exports not a function")
     }
 }
 
