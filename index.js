@@ -14,7 +14,9 @@ function initializePlayground () {
 
 function jsStubText () {
     return [
-        'module.exports = function (svgElem) {',
+        'var createElement = require("svg-create-element")',
+        '',
+        'module.exports = function (svgRootElement) {',
         '    ',
         '};',
         ''
