@@ -1,29 +1,16 @@
-var vm = require("vm")
-  , JavaScriptEditor = require("./src/JavaScriptEditor.js")
+var JavaScriptPlayground = require("./src/JavaScriptPlayground.js")
 
 window.addEventListener("DOMContentLoaded", function () {
-    var editorElem = document.getElementById("javascript-editor")
-      , editor = new JavaScriptEditor(editorElem, initialDocumentText)
-
-    editor.on("changeValidJS", function (e) {
-        var result = vm.runInNewContext(e.documentText(), {
-            "require": require,
-            "module": { "exports": {} }
-        })
-
-        try {
-            result("bar")
-        }
-        catch (e) {
-            console.log(e.stack)
-        }
-    })
+    var playgroundElem = document.getElementById("javascript-playground")
+    new JavaScriptPlayground(playgroundElem, jsStubText())
 }, false)
 
 
-var initialDocumentText = [
-    'module.exports = function (svgElem) {',
-    '    ',
-    '};',
-    ''
-].join("\n")
+function jsStubText () {
+    return [
+        'module.exports = function (svgElem) {',
+        '    ',
+        '};',
+        ''
+    ].join("\n")
+}

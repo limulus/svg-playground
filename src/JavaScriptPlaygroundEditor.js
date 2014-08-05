@@ -3,7 +3,7 @@
 var ace = require("brace")
   , inherits = require("util").inherits
   , EventEmitter = require("events").EventEmitter
-  , JavaScriptEditorEvent = require("./JavaScriptEditorEvent.js")
+  , JavaScriptPlaygroundEditorEvent = require("./JavaScriptPlaygroundEditorEvent.js")
 
 // Load in JavaScript highlighter/validator and a nice theme.
 require('brace/mode/javascript')
@@ -12,7 +12,7 @@ require('brace/theme/monokai')
 // We need a setImmediate implementation for browsers that don't support it.
 require("setimmediate")
 
-var JavaScriptEditor = module.exports = function (element, documentText) {
+var JavaScriptPlaygroundEditor = module.exports = function (element, documentText) {
     EventEmitter.call(this)
 
     this._aceEditor = ace.edit(element)
@@ -25,16 +25,16 @@ var JavaScriptEditor = module.exports = function (element, documentText) {
 	var session = this._aceEditor.getSession()
     session.on("changeAnnotation", this._handleChangeAnnotationEvent.bind(this))
 }
-inherits(JavaScriptEditor, EventEmitter)
+inherits(JavaScriptPlaygroundEditor, EventEmitter)
 
-JavaScriptEditor.prototype._handleChangeAnnotationEvent = function () {
+JavaScriptPlaygroundEditor.prototype._handleChangeAnnotationEvent = function () {
     if (this.documentContainsNoErrors()) {
-        var jseEvent = new JavaScriptEditorEvent("changeValidJS", this)
+        var jseEvent = new JavaScriptPlaygroundEditorEvent("changeValidJS", this)
         setImmediate(this.emit.bind(this, "changeValidJS", jseEvent))
     }
 }
 
-JavaScriptEditor.prototype.documentContainsNoErrors = function () {
+JavaScriptPlaygroundEditor.prototype.documentContainsNoErrors = function () {
     var editorAnnotations = this._aceEditor.getSession().getAnnotations()
     var errorAnnotations = editorAnnotations.filter(function (annotation) {
         return annotation.type === "error"
@@ -42,7 +42,7 @@ JavaScriptEditor.prototype.documentContainsNoErrors = function () {
     return errorAnnotations.length === 0   
 }
 
-JavaScriptEditor.prototype.documentText = function () {
+JavaScriptPlaygroundEditor.prototype.documentText = function () {
     return this._aceEditor.getValue()
 }
 
