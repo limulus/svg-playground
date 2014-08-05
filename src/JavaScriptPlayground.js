@@ -3,6 +3,11 @@
 var JavaScriptPlaygroundEditor = require("./JavaScriptPlaygroundEditor.js")
   , vm = require("vm")
 
+// Require a bunch of modules that we want to make available to 
+// the code running in the playground.
+require("inherits")
+require("svg-create-element")
+
 var JavaScriptPlayground = module.exports = function (playgroundElement, jsStubText) {
 	this._playgroundElem = playgroundElement
 
