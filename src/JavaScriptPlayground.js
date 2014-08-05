@@ -16,12 +16,14 @@ var JavaScriptPlayground = module.exports = function (playgroundElement, jsStubT
 }
 
 JavaScriptPlayground.prototype._handleJSChange = function (event) {
+    var context = {
+        "require": require,
+        "module": { "exports": {} }
+    }
+
+        vm.runInNewContext(event.documentText(), context)
+        context.module.exports.call(undefined, "bar")
     try {
-        var result = vm.runInNewContext(event.documentText(), {
-            "require": require,
-            "module": { "exports": {} }
-        })
-        result("bar")
     }
     catch (e) {
         console.log(e)
