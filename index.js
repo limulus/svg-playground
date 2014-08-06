@@ -1,5 +1,6 @@
 var JavaScriptPlayground = require("./lib/JavaScriptPlayground.js")
-  , svgCreateElement = require("svg-create-element")
+var SVGPlaygroundJSTemplate = require("./lib/SVGPlaygroundJSTemplate.js")
+var svgCreateElement = require("svg-create-element")
 
 // Async initialization
 if (document.readyState === "loading") {
@@ -29,7 +30,8 @@ function initializePlayground () {
         return [svgRoot]
     }
 
-    new JavaScriptPlayground(playgroundElem, jsStubText(), generateUserCodeArguments)
+    var jsTemplate = new SVGPlaygroundJSTemplate()
+    new JavaScriptPlayground(playgroundElem, jsTemplate, generateUserCodeArguments)
 }
 
 function removeAllChildNodes (element) {
@@ -38,13 +40,3 @@ function removeAllChildNodes (element) {
     }
 }
 
-function jsStubText () {
-    return [
-        'var createElement = require("svg-create-element")',
-        '',
-        'module.exports = function (svgRootElement) {',
-        '    ',
-        '}',
-        ''
-    ].join("\n")
-}
