@@ -1,4 +1,4 @@
-var JavaScriptPlayground = require("./src/JavaScriptPlayground.js")
+var JavaScriptPlayground = require("./lib/JavaScriptPlayground.js")
   , svgCreateElement = require("svg-create-element")
 
 // Async initialization
