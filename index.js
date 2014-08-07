@@ -12,6 +12,8 @@ else {
 
 function initializePlayground () {
     var playgroundContainerElem = document.createElement("div")
+    playgroundContainerElem.style.height = "500px"
+    playgroundContainerElem.style.width = "100%"
     document.body.appendChild(playgroundContainerElem)
     new SVGPlayground(playgroundContainerElem)
 }
