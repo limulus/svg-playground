@@ -13,11 +13,11 @@
   "author": "Eric McCarthy <eric@limulus.net> (http://www.limulus.net/)",
   "license": "MIT",
   "dependencies": {
-    "beefy": "^2.1.0",
+    "beefy": "^2.1.1",
     "brace": "^0.3.0",
-    "browserify": "^5.9.1",
     "inherits": "^2.0.1",
     "setimmediate": "^1.0.2",
-    "svg-create-element": "^1.0.0"
+    "svg-create-element": "^1.0.0",
+    "watchify": "^1.0.2"
   }
 }
