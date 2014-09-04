@@ -1,17 +1,29 @@
 {
   "name": "svg-playground",
-  "version": "0.0.0",
-  "description": "Create and play with SVG images using JavaScript.",
+  "version": "0.0.1",
+  "description": "Create and play with SVG images using JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/beefy/bin/beefy index.js"
   },
   "keywords": [
     "svg",
     "playground"
   ],
   "author": "Eric McCarthy <eric@limulus.net> (http://www.limulus.net/)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/limulus/svg-playground.git"
+  },
+  "bugs": {
+    "url": "https://github.com/limulus/svg-playground/issues"
+  },
+  "homepage": "https://github.com/limulus/svg-playground",
   "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
+  },
   "dependencies": {
     "beefy": "^2.1.1",
     "brace": "^0.3.0",
