@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/beefy/bin/beefy index.js"
+    "start": "./index.js"
   },
   "keywords": [
     "svg",
@@ -27,9 +27,10 @@
   "dependencies": {
     "beefy": "^2.1.1",
     "brace": "^0.3.0",
+    "browserify": "^5.11.1",
     "inherits": "^2.0.1",
+    "portfinder": "^0.2.1",
     "setimmediate": "^1.0.2",
-    "svg-create-element": "^1.0.0",
-    "watchify": "^1.0.2"
+    "svg-create-element": "^1.0.0"
   }
 }
