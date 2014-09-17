@@ -30,6 +30,7 @@
     "browserify": "^5.11.1",
     "http-file-share": "^1.0.0",
     "inherits": "^2.0.1",
+    "nomnom": "^1.8.0",
     "portfinder": "^0.2.1",
     "setimmediate": "^1.0.2",
     "svg-create-element": "^1.0.0"
