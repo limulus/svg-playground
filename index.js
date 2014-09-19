@@ -9,6 +9,7 @@ var httpFileShare = require("http-file-share")
 var portfinder = require("portfinder")
 
 var projectDir = process.cwd()
+var projectIndexPath = path.join(projectDir, "index.js")
 
 portfinder.getPort(function (err, port) {
   if (err) throw err
@@ -16,9 +17,10 @@ portfinder.getPort(function (err, port) {
   var beefyHandler = beefy({
     "entries": {
       "/client.js": path.join(__dirname, "client.js"),
-      "/index.js": path.join(projectDir, "index.js")
+      "/index.js": projectIndexPath
     },
-    "cwd": __dirname
+    "cwd": __dirname,
+    "bundlerFlags": ["--full-paths"]
   })
 
   var projectBaseRoute = /^\/project/
@@ -26,6 +28,12 @@ portfinder.getPort(function (err, port) {
   var server = http.createServer(function (req, res) {
     if (req.url.match(projectBaseRoute)) {
       fileShareHandler(req, res)
+    }
+    else if (req.url.match(/^\/meta/)) {
+      res.writeHead(200, { "Content-type": "application/json" })
+      res.end(JSON.stringify({
+        "requirePath": projectIndexPath
+      }))
     }
     else {
       beefyHandler(req, res)

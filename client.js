@@ -2,9 +2,6 @@
 
 var SVGPlayground = require("./lib/SVGPlayground.js")
 
-var assert = require("assert")
-var xhr = require("xhr")
-
 // Async initialization
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializePlayground, false)
