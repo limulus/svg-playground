@@ -2,6 +2,7 @@
 
 var SVGPlayground = require("./lib/SVGPlayground.js")
 
+var assert = require("assert")
 var xhr = require("xhr")
 
 // Async initialization
@@ -13,17 +14,9 @@ else {
 }
 
 function initializePlayground () {
-
-  xhr({"uri": "/svg-project.json"}, function (err, res, body) {
-    if (err) {
-      window.alert("Failed to load /svg-project.json")
-      return
-    }
-
-    var playgroundContainerElem = document.createElement("div")
-    playgroundContainerElem.style.height = "500px"
-    playgroundContainerElem.style.width = "100%"
-    document.body.appendChild(playgroundContainerElem)
-    new SVGPlayground(playgroundContainerElem)
-  })
+  var playgroundContainerElem = document.createElement("div")
+  playgroundContainerElem.style.height = "500px"
+  playgroundContainerElem.style.width = "100%"
+  document.body.appendChild(playgroundContainerElem)
+  new SVGPlayground(playgroundContainerElem)
 }

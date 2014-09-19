@@ -14,13 +14,17 @@ portfinder.getPort(function (err, port) {
   if (err) throw err
 
   var beefyHandler = beefy({
-    "entries": ["./client.js"],
+    "entries": {
+      "/client.js": path.join(__dirname, "client.js"),
+      "/index.js": path.join(projectDir, "index.js")
+    },
     "cwd": __dirname
   })
 
-  var fileShareHandler = httpFileShare(projectDir, /^\/files/)
+  var projectBaseRoute = /^\/project/
+  var fileShareHandler = httpFileShare(projectDir, projectBaseRoute)
   var server = http.createServer(function (req, res) {
-    if (req.url.match(/^\/files/)) {
+    if (req.url.match(projectBaseRoute)) {
       fileShareHandler(req, res)
     }
     else {
