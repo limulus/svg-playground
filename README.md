@@ -1,28 +1,28 @@
-SVG Playground
-==============
+# SVG Playground
 
-Create and play with SVG images using JavaScript.
+Play, create and collaborate on parametric SVG images generated using JavaScript.
 
 
-Installation
-------------
+## Synopsis
+
+This app is meant to be installed as a dependency of a project of your own. When opened in the browser, it looks like this:
+
+![Screenshot of SVG Playground](http://www.limulus.net/projects/svg-playground/screenshot.png)
+
+When you update the code on the right, and the code is able to compile, the SVG is immediately updated on the left.
+
+
+## Installation
 
 ```shell
 npm install svg-playground
 ```
 
 
-Running
--------
+## Running
 
 ```shell
-npm start
+node node_modules/svg-playground/index.js
 ```
 
-Then open the URL printed to the console in Chrome.
-
-
-Caveats
--------
-
-This is a very early prerelease.
+Using the `--open` flag will cause your default browser to open the application. You might like to have this command be your `npm start` script for your project.
