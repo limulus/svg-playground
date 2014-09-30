@@ -52,10 +52,13 @@ portfinder.getPort(function (err, port) {
   var addr = "127.0.0.1"
   var url = "http://" + addr + ":" + port + "/"
   server.listen(port, "127.0.0.1")
-  console.log("Running application on " + url)
 
-  if (opts.open) {
-    console.log("Attempting to open URL in browser.")
-    open(url)
-  }
+  server.on("listening", function () {
+    console.log("Running application on " + url)
+
+    if (opts.open) {
+      console.log("Attempting to open URL in browser.")
+      open(url)
+    }
+  })
 })
