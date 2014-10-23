@@ -1,6 +1,6 @@
 {
   "name": "svg-playground",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Play, create and collaborate on parametric SVG images generated using JavaScript",
   "main": "index.js",
   "scripts": {
