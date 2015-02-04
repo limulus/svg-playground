@@ -16,5 +16,5 @@ function initializePlayground () {
   playgroundContainerElem.style.width = "100%"
   playgroundContainerElem.style.position = "absolute"
   document.body.appendChild(playgroundContainerElem)
-  new SVGPlayground(playgroundContainerElem)
+  window.svgPlayground = new SVGPlayground(playgroundContainerElem)
 }
