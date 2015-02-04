@@ -37,4 +37,4 @@ When you've got an SVG that you like, you can export it with Command-E (or Ctrl-
 
 ## See Also
 
-You might like [vecs](https://www.npmjs.com/package/vecs), a lightweight SVG library in its infancy.
+You might like [vecs](https://www.npmjs.com/package/vecs), a lightweight SVG library in its infancy. Also check out [tucsonjs-logo](https://github.com/limulus/tucsonjs-logo) for an example of a project that uses svg-playground.
